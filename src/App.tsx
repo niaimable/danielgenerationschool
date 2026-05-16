@@ -418,7 +418,7 @@ function FounderPage() {
                 <div className="absolute -top-4 -left-4 w-full h-full border-2 border-school-tan/50 rounded-[2.5rem]" />
                 <div className="aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(107,20,29,0.2)] relative z-10 bg-stone-200">
                   <img
-                    src="/assets/Image/liliose.jpg"
+                    src="/assets/Image/liliose.jpeg"
                     alt="Liliose Kaligirwa Tayi — Founder of Daniel Generation School"
                     className="w-full h-full object-cover object-top"
                   />
@@ -623,7 +623,7 @@ function SchoolWebsite() {
           </motion.h1>
 
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.5 }} className="max-w-xl mx-auto text-base sm:text-lg text-white/60 mb-12 leading-relaxed font-light tracking-wide">
-            Commitment to integrating Christian values into every aspect of education
+            Shaping Godly Character and futures
           </motion.p>
 
           {/* ★ THREE CTAs */}
