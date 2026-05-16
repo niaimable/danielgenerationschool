@@ -418,7 +418,7 @@ function FounderPage() {
                 <div className="absolute -top-4 -left-4 w-full h-full border-2 border-school-tan/50 rounded-[2.5rem]" />
                 <div className="aspect-[3/4] rounded-[2.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(107,20,29,0.2)] relative z-10 bg-stone-200">
                   <img
-                    src="/assets/Image/liliose.jpeg"
+                    src="/assets/Image/liliose.jpg"
                     alt="Liliose Kaligirwa Tayi — Founder of Daniel Generation School"
                     className="w-full h-full object-cover object-top"
                   />
