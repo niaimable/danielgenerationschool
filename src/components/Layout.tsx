@@ -135,8 +135,7 @@ export function Navigation({ scrolled: forceScrolled }: { scrolled?: boolean }) 
           {/* CTA */}
           <div className="border-l border-current/20 pl-6">
             <Link
-              to="/#footer"
-              onClick={(e) => handleHashClick(e, 'footer')}
+              to="/contact"
               className="px-5 py-2.5 bg-school-tan text-school-maroon text-xs font-black rounded-lg hover:shadow-xl hover:-translate-y-0.5 transition-all uppercase tracking-widest"
             >
               Contact Us
@@ -189,8 +188,8 @@ export function Navigation({ scrolled: forceScrolled }: { scrolled?: boolean }) 
                 )}
               </div>
               <Link
-                to="/#footer"
-                onClick={(e) => handleHashClick(e, 'footer')}
+                to="/contact"
+                onClick={() => setIsMenuOpen(false)}
                 className="w-full py-4 bg-school-maroon text-white text-xs font-black uppercase tracking-widest rounded-xl text-center"
               >
                 Contact Us

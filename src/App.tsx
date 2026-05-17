@@ -2,7 +2,7 @@ import { Link, Routes, Route, useLocation, useParams, Navigate } from 'react-rou
 import {
   ChevronRight, ChevronLeft, BookOpen, Atom, Users, CheckCircle2,
   Calendar, Camera, ChevronDown, ChevronUp, GraduationCap, MapPin,
-  ArrowUpRight, Quote, Wifi, Utensils, TreePine, Heart, Star, Mail
+  ArrowUpRight, Quote, Wifi, Utensils, TreePine, Heart, Star, Mail, Phone
 } from 'lucide-react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
 import React, { useState, useEffect, useRef, Suspense, lazy } from 'react';
@@ -1140,6 +1140,266 @@ function FAQPage() {
 }
 
 /* ════════════════════════════════════════════════
+   PAGE: CONTACT US
+════════════════════════════════════════════════ */
+function ContactPage() {
+  const [formState, setFormState] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      // ── Replace these three values with your EmailJS credentials ──────────
+      const SERVICE_ID  = 'service_nuz9vic';   // e.g. 'service_abc123'
+      const TEMPLATE_ID = 'template_yk24b17';  // e.g. 'template_xyz789'
+      const PUBLIC_KEY  = 'F9QxZv6L4vSvcmCp-';   // e.g. 'user_abc123xyz'
+      // ──────────────────────────────────────────────────────────────────────
+
+      const emailjs = await import('@emailjs/browser');
+
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name:    formState.name,
+          from_email:   formState.email,
+          phone:        formState.phone || 'Not provided',
+          subject:      formState.subject || 'General Enquiry',
+          message:      formState.message,
+          to_email:     'info@danielgenerationschool.rw',
+        },
+        PUBLIC_KEY
+      );
+
+      setSubmitted(true);
+    } catch (err) {
+      setError('Something went wrong. Please try again or email us directly at info@danielgenerationschool.rw');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-stone-50 selection:bg-school-tan/30">
+      <GrainOverlay />
+      <Navigation scrolled={true} />
+
+      {/* Hero */}
+      <section className="pt-32 pb-0 bg-school-maroon relative overflow-hidden">
+        <AmbientBlob className="top-0 right-0 w-[30rem] h-[30rem] bg-school-tan/10 translate-x-1/3 -translate-y-1/3" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10 pb-16">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
+            <div className="flex items-center gap-4 mb-8">
+              <div className="h-px w-8 bg-school-tan" />
+              <span className="text-school-tan font-black uppercase tracking-[0.4em] text-[10px]">Get In Touch</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white leading-[0.9] tracking-tighter mb-6">
+              Contact <span className="text-school-tan italic">Us.</span>
+            </h1>
+            <p className="text-white/50 text-lg font-light max-w-2xl">We'd love to hear from you. Reach out to our admissions team, book a visit, or simply say hello.</p>
+          </motion.div>
+        </div>
+        <div className="h-16 bg-stone-50 rounded-t-[3rem]" />
+      </section>
+
+      <section className="pb-24 md:pb-32 bg-stone-50">
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* Contact info cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-14">
+            {[
+              {
+                icon: <MapPin className="w-5 h-5 text-school-tan" />,
+                label: 'Our Address',
+                value: 'KG 24 Ave, No 38, Kagugu, Gasabo, Kigali',
+                sub: 'Next to Omega Church',
+                href: 'https://maps.google.com/?q=Omega+Church+KG+24+Ave+Kigali',
+              },
+              {
+                icon: <Phone className="w-5 h-5 text-school-tan" />,
+                label: 'Call Us',
+                value: '+250 796 707 019',
+                sub: 'Mon–Fri, 7:00am – 4:00pm',
+                href: 'tel:+250796707019',
+              },
+              {
+                icon: <Mail className="w-5 h-5 text-school-tan" />,
+                label: 'Email Us',
+                value: 'info@danielgenerationschool.rw',
+                sub: 'We reply within 24 hours',
+                href: 'mailto:info@danielgenerationschool.rw',
+              },
+            ].map((item, idx) => (
+              <motion.a
+                key={idx}
+                href={item.href}
+                target={item.href.startsWith('http') ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1, duration: 0.7 }}
+                className="bg-white border border-stone-100 rounded-[2rem] p-7 flex gap-5 items-start hover:border-school-tan/30 hover:shadow-[0_20px_50px_-15px_rgba(107,20,29,0.1)] transition-all duration-300 group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-school-tan/10 flex items-center justify-center shrink-0 group-hover:bg-school-tan/20 transition-colors">{item.icon}</div>
+                <div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-school-tan mb-1">{item.label}</p>
+                  <p className="text-sm font-bold text-school-maroon mb-0.5">{item.value}</p>
+                  <p className="text-xs text-stone-400 font-light">{item.sub}</p>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+
+          {/* Map + Form */}
+          <div className="grid lg:grid-cols-2 gap-8">
+
+            {/* Google Map */}
+            <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2, duration: 0.9 }} className="rounded-[2.5rem] overflow-hidden shadow-[0_30px_80px_-20px_rgba(107,20,29,0.15)] border border-stone-100 min-h-[420px] relative">
+              <iframe
+                title="Daniel Generation School — Map"
+                src="https://www.openstreetmap.org/export/embed.html?bbox=30.0804%2C-1.9115%2C30.0865%2C-1.9035&layer=mapnik&marker=-1.9074563%2C30.0834471"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: '420px' }}
+                allowFullScreen
+                loading="lazy"
+              />
+              {/* Overlay badge */}
+              <div className="absolute bottom-5 left-5 bg-white rounded-xl px-4 py-3 shadow-xl border border-stone-100 flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <div>
+                  <p className="text-xs font-black text-school-maroon uppercase tracking-widest">Daniel Generation School</p>
+                  <p className="text-[10px] text-stone-400">KG 24 Ave, Kagugu, Kigali</p>
+                </div>
+              </div>
+              {/* Open in maps link */}
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Omega+Church+KG+24+Ave+Kigali+Rwanda"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute top-5 right-5 bg-white rounded-xl px-4 py-2.5 shadow-xl border border-stone-100 flex items-center gap-2 text-[10px] font-black text-school-maroon uppercase tracking-widest hover:bg-school-tan hover:text-school-maroon transition-all"
+              >
+                Open in Maps <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </motion.div>
+
+            {/* Contact Form */}
+            <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3, duration: 0.9 }} className="bg-white border border-stone-100 rounded-[2.5rem] p-8 md:p-10 shadow-[0_30px_80px_-20px_rgba(107,20,29,0.08)]">
+              {submitted ? (
+                <div className="h-full flex flex-col items-center justify-center text-center py-12">
+                  <div className="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center mb-6">
+                    <CheckCircle2 className="w-8 h-8 text-emerald-500" />
+                  </div>
+                  <h3 className="text-2xl font-serif text-school-maroon mb-3">Message Sent!</h3>
+                  <p className="text-stone-400 text-sm font-light mb-8 max-w-xs">Thank you for reaching out. Our team will get back to you within 24 hours.</p>
+                  <button onClick={() => { setSubmitted(false); setFormState({ name: '', email: '', phone: '', subject: '', message: '' }); }} className="px-8 py-3.5 bg-school-maroon text-white font-black rounded-xl text-xs uppercase tracking-widest hover:bg-school-maroon/90 transition-all">
+                    Send Another
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <h3 className="text-2xl md:text-3xl font-serif text-school-maroon mb-2">Send us a Message</h3>
+                  <p className="text-stone-400 text-sm font-light mb-8">For admissions, visits, or general enquiries.</p>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-stone-400 mb-1.5 block">Full Name *</label>
+                        <input
+                          required
+                          type="text"
+                          value={formState.name}
+                          onChange={e => setFormState(s => ({ ...s, name: e.target.value }))}
+                          placeholder="Your name"
+                          className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700 placeholder:text-stone-300 focus:outline-none focus:border-school-tan transition-colors"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10px] font-black uppercase tracking-widest text-stone-400 mb-1.5 block">Phone</label>
+                        <input
+                          type="tel"
+                          value={formState.phone}
+                          onChange={e => setFormState(s => ({ ...s, phone: e.target.value }))}
+                          placeholder="+250 ..."
+                          className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700 placeholder:text-stone-300 focus:outline-none focus:border-school-tan transition-colors"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-stone-400 mb-1.5 block">Email Address *</label>
+                      <input
+                        required
+                        type="email"
+                        value={formState.email}
+                        onChange={e => setFormState(s => ({ ...s, email: e.target.value }))}
+                        placeholder="your@email.com"
+                        className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700 placeholder:text-stone-300 focus:outline-none focus:border-school-tan transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-stone-400 mb-1.5 block">Subject</label>
+                      <select
+                        value={formState.subject}
+                        onChange={e => setFormState(s => ({ ...s, subject: e.target.value }))}
+                        className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700 focus:outline-none focus:border-school-tan transition-colors bg-white"
+                      >
+                        <option value="">Select a topic...</option>
+                        <option value="admissions">Admissions Enquiry</option>
+                        <option value="visit">Book a Campus Visit</option>
+                        <option value="fees">School Fees</option>
+                        <option value="programs">Programs & Curriculum</option>
+                        <option value="other">Other</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-black uppercase tracking-widest text-stone-400 mb-1.5 block">Message *</label>
+                      <textarea
+                        required
+                        rows={4}
+                        value={formState.message}
+                        onChange={e => setFormState(s => ({ ...s, message: e.target.value }))}
+                        placeholder="How can we help you?"
+                        className="w-full border border-stone-200 rounded-xl px-4 py-3 text-sm text-stone-700 placeholder:text-stone-300 focus:outline-none focus:border-school-tan transition-colors resize-none"
+                      />
+                    </div>
+                    {error && (
+                      <p className="text-red-500 text-xs font-medium bg-red-50 border border-red-100 rounded-xl px-4 py-3">{error}</p>
+                    )}
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full py-4 bg-school-maroon text-white font-black rounded-xl text-xs uppercase tracking-widest hover:bg-school-maroon/90 transition-all hover:-translate-y-0.5 shadow-[0_10px_30px_rgba(107,20,29,0.2)] disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 flex items-center justify-center gap-3"
+                    >
+                      {loading ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          Sending...
+                        </>
+                      ) : 'Send Message →'}
+                    </button>
+                  </form>
+                </>
+              )}
+            </motion.div>
+          </div>
+
+          {/* Book a Visit banner */}
+          <div className="mt-12">
+            <BookVisitBanner />
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════
    APP ROOT
 ════════════════════════════════════════════════ */
 export default function App() {
@@ -1158,6 +1418,7 @@ export default function App() {
           <Route path="/" element={<SchoolWebsite />} />
           <Route path="/founder" element={<FounderPage />} />
           <Route path="/facilities" element={<FacilitiesPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/core-values" element={<CoreValuesPage />} />
           <Route path="/faq" element={<FAQPage />} />
           <Route path="/gallery/:id" element={<GalleryDetailPage />} />
