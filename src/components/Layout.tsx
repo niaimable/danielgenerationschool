@@ -24,17 +24,20 @@ function LanguageToggle({ isScrolled }: { isScrolled: boolean }) {
   const { i18n } = useTranslation();
   const current = i18n.language?.startsWith('fr') ? 'fr' : 'en';
   const toggle = () => i18n.changeLanguage(current === 'en' ? 'fr' : 'en');
+
   return (
     <button
       onClick={toggle}
       title={current === 'en' ? 'Passer en français' : 'Switch to English'}
-      className={`flex items-center justify-center w-9 h-9 rounded-lg border transition-all hover:-translate-y-0.5 text-xl ${
-        isScrolled
-          ? 'border-stone-200 hover:border-school-maroon bg-white'
-          : 'border-white/20 hover:border-white bg-white/5'
+      className={`rounded overflow-hidden border transition-all hover:-translate-y-0.5 hover:scale-110 ${
+        isScrolled ? 'border-stone-200 hover:border-school-maroon' : 'border-white/30 hover:border-white'
       }`}
     >
-      {current === 'en' ? '🇫🇷' : '🇬🇧'}
+      <img
+        src={current === 'en' ? 'https://flagcdn.com/w40/fr.png' : 'https://flagcdn.com/w40/gb.png'}
+        alt={current === 'en' ? 'Français' : 'English'}
+        className="w-6 h-4 object-cover block"
+      />
     </button>
   );
 }
@@ -68,11 +71,11 @@ export function Navigation({ scrolled: forceScrolled }: { scrolled?: boolean }) 
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'}`}>
-      <div className="max-w-screen-2xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between gap-8">
 
         {/* Logo — never shrinks */}
-        <Link to="/" className="flex items-center gap-3 group hover:opacity-90 transition-opacity shrink-0">
-          <div className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-xl overflow-hidden bg-white/10 shrink-0">
+        <Link to="/" className="flex items-center gap-2.5 group hover:opacity-90 transition-opacity shrink-0">
+          <div className="w-9 h-9 md:w-11 md:h-11 flex items-center justify-center rounded-xl overflow-hidden bg-white/10 shrink-0">
             <img src="/logo.jpg" alt="DGS Logo" className="w-full h-full object-contain" referrerPolicy="no-referrer"
               onError={(e) => {
                 const img = e.currentTarget;
