@@ -1,4 +1,5 @@
 import { Link, Routes, Route, useLocation, useParams, Navigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import {
   ChevronRight, ChevronLeft, BookOpen, Atom, Users, CheckCircle2,
   Calendar, Camera, ChevronDown, ChevronUp, GraduationCap, MapPin,
@@ -486,6 +487,17 @@ function SchoolWebsite() {
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '25%']);
   const [selectedEvent, setSelectedEvent] = useState<typeof EVENTS[0] | null>(null);
+
+  <Helmet>
+  <title>Daniel Generation School — Christian School in Kigali, Rwanda</title>
+  <meta name="description" content="Daniel Generation School (DGS) is a Cambridge-curriculum Christian school in Kigali, Rwanda. Nursery & Primary programs rooted in faith, excellence and leadership." />
+  <meta name="keywords" content="Christian school Kigali, nursery school Rwanda, primary school Kigali, Cambridge school Rwanda, DGS" />
+  <meta property="og:title" content="Daniel Generation School" />
+  <meta property="og:description" content="Shaping Godly Character and futures in Kigali, Rwanda." />
+  <meta property="og:image" content="https://danielgenerationschool.rw/assets/Image/dgs.png" />
+  <meta property="og:url" content="https://danielgenerationschool.rw" />
+  <link rel="canonical" href="https://danielgenerationschool.rw" />
+</Helmet>
 
   return (
     <div className="min-h-screen selection:bg-school-tan/30 scroll-smooth">
