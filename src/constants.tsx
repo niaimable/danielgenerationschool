@@ -45,41 +45,53 @@ export const EVENTS = [
 
 export const GALLERY_IMAGES = [
   {
-    id: 'classroom-dynamic',
-    src: '/assets/Image/2.jpeg',
-    alt: 'Classroom Dynamic',
-    description: 'Our classrooms are designed to be vibrant hubs of collaborative learning. Here, students engage in interactive lessons that balance group discussions with focused individual projects, fostering a curiosity-driven atmosphere.'
+    id: 'students-writing',
+    src: '/assets/Image/photo1.jpg',
+    alt: 'Students Writing',
+    description: 'Our learners focused and engaged during a writing activity in the nursery classroom — building early literacy skills one letter at a time.'
   },
   {
-    id: 'creative-arts',
-    src: '/assets/Image/10.jpeg',
-    alt: 'Creative Arts',
-    description: 'Expression is central to a holistic education. In our arts program, students explore various mediums — from traditional painting to digital design — helping them develop their unique voice and creative thinking skills.'
+    id: 'teacher-helping',
+    src: '/assets/Image/photo2.jpg',
+    alt: 'Teacher and Students',
+    description: 'Our dedicated teachers work closely with every learner, offering patient, hands-on guidance that meets each child exactly where they are.'
   },
   {
-    id: 'science-lab',
-    src: '/assets/Image/16.png',
-    alt: 'Science Lab',
-    description: 'Our modern science laboratories allow students to move beyond theory into hands-on discovery. From elementary chemistry to advanced biology, we provide the tools for students to experiment safely and think like future scientists.'
+    id: 'playground',
+    src: '/assets/Image/photo3.jpg',
+    alt: 'Outdoor Playtime',
+    description: 'Joyful outdoor play is an essential part of every day at DGS — children laugh, move, and discover the world around them under careful supervision.'
   },
   {
-    id: 'outdoor-play',
-    src: '/assets/Image/9.jpeg',
-    alt: 'Outdoor Play',
-    description: 'Physical activity and peer interaction are vital for development. Our spacious outdoor areas are safe environments where students can play, socialise, and participate in organized sports, building resilience and teamwork.'
+    id: 'classroom-activity',
+    src: '/assets/Image/photo4.jpg',
+    alt: 'Classroom Activity',
+    description: 'Hands-on learning activities spark curiosity and creativity, helping our learners develop problem-solving skills in a warm, engaging environment.'
   },
   {
-    id: 'library-time',
-    src: '/assets/Image/6.jpeg',
-    alt: 'Library Time',
-    description: 'The school library is a sanctuary for research and literature. We encourage a love for reading from a young age, providing an extensive collection of both international and local works to broaden our students\'s horizons.'
+    id: 'floor-play',
+    src: '/assets/Image/photo5.jpg',
+    alt: 'Creative Play',
+    description: 'Children learn best through play — exploring shapes, colours and patterns together builds early mathematical thinking and teamwork.'
   },
   {
-    id: 'student-projects',
-    src: '/assets/Image/14.jpeg',
-    alt: 'Student Projects',
-    description: 'Project-based learning at DGS helps students apply theoretical knowledge to real-world problems. Whether it is an environmental initiative or a community service plan, these projects are the cornerstone of our leadership training.'
-  }
+    id: 'classroom-overview',
+    src: '/assets/Image/photo6.jpg',
+    alt: 'Our Classroom',
+    description: 'Our bright, welcoming nursery classrooms are thoughtfully designed with learning corners for reading, creating, and discovering.'
+  },
+  {
+    id: 'group-activity',
+    src: '/assets/Image/photo7.jpg',
+    alt: 'Group Learning',
+    description: 'Collaborative floor activities build teamwork, communication, and social skills from the very earliest years of learning.'
+  },
+  {
+    id: 'art-class',
+    src: '/assets/Image/photo8.jpg',
+    alt: 'Art and Expression',
+    description: 'Creative arts help our learners express themselves with confidence and joy — from drawings to paintings, every child has a voice.'
+  },
 ];
 
 export const NEWS_STORIES = [
