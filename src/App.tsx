@@ -1102,8 +1102,136 @@ function ContactPage() {
 }
 
 /* ════════════════════════════════════════════════
-   APP ROOT
+   PAGE: 404 NOT FOUND
 ════════════════════════════════════════════════ */
+function NotFoundPage() {
+  const { t, i18n } = useTranslation();
+  const isFr = i18n.language?.startsWith('fr');
+
+  return (
+    <div className="min-h-screen bg-school-maroon selection:bg-school-tan/30 flex flex-col">
+      <GrainOverlay />
+      <Navigation scrolled={false} />
+
+      <div className="flex-1 flex items-center justify-center px-6 relative overflow-hidden">
+        {/* Ambient blobs */}
+        <AmbientBlob className="top-0 right-0 w-[40rem] h-[40rem] bg-school-tan/10 translate-x-1/3 -translate-y-1/3" />
+        <AmbientBlob className="bottom-0 left-0 w-[30rem] h-[30rem] bg-white/5 -translate-x-1/3 translate-y-1/3" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center relative z-10 max-w-2xl mx-auto"
+        >
+          {/* 404 number */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[10rem] md:text-[16rem] font-serif text-white/10 leading-none select-none mb-0"
+          >
+            404
+          </motion.div>
+
+          {/* Icon */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className="flex justify-center -mt-8 mb-8"
+          >
+            <div className="w-20 h-20 rounded-[2rem] bg-school-tan/15 border border-school-tan/20 flex items-center justify-center">
+              <span className="text-4xl">🔍</span>
+            </div>
+          </motion.div>
+
+          {/* Text */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.7 }}
+          >
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="h-px w-8 bg-school-tan/50" />
+              <span className="text-school-tan font-black uppercase tracking-[0.4em] text-[10px]">
+                {isFr ? 'Page introuvable' : 'Page not found'}
+              </span>
+              <div className="h-px w-8 bg-school-tan/50" />
+            </div>
+
+            <h1 className="text-4xl md:text-6xl font-serif text-white mb-6 leading-tight">
+              {isFr ? 'Cette page n\'existe' : 'This page doesn\'t'}<br />
+              <span className="text-school-tan italic">
+                {isFr ? 'pas encore.' : 'exist yet.'}
+              </span>
+            </h1>
+
+            <p className="text-white/50 text-base md:text-lg font-light mb-12 max-w-md mx-auto leading-relaxed">
+              {isFr
+                ? 'La page que vous cherchez a peut-être été déplacée, supprimée ou n\'a jamais existé.'
+                : 'The page you\'re looking for may have been moved, deleted, or never existed.'}
+            </p>
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.7 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Link
+              to="/"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-school-tan text-school-maroon font-black rounded-xl hover:bg-white transition-all hover:-translate-y-1 shadow-[0_20px_60px_rgba(0,0,0,0.3)] text-sm uppercase tracking-widest"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              {isFr ? 'Retour à l\'accueil' : 'Back to Home'}
+            </Link>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/20 text-white font-black rounded-xl hover:bg-white/10 transition-all text-sm uppercase tracking-widest"
+            >
+              {isFr ? 'Nous contacter' : 'Contact Us'}
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+
+          {/* Quick links */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.7 }}
+            className="mt-16 pt-10 border-t border-white/10"
+          >
+            <p className="text-white/30 text-xs font-black uppercase tracking-widest mb-6">
+              {isFr ? 'Pages populaires' : 'Popular pages'}
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {[
+                { to: '/founder',     label: isFr ? 'Notre fondatrice' : 'Our Founder' },
+                { to: '/facilities',  label: isFr ? 'Nos installations' : 'Facilities' },
+                { to: '/faq',         label: 'FAQ' },
+                { to: '/core-values', label: isFr ? 'Valeurs' : 'Core Values' },
+                { to: '/calendar',    label: isFr ? 'Calendrier' : 'Calendar' },
+              ].map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="px-5 py-2 rounded-full border border-white/15 text-white/60 text-xs font-bold uppercase tracking-widest hover:border-school-tan hover:text-school-tan transition-all"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
+
+      <Footer />
+    </div>
+  );
+}
 export default function App() {
   return (
     <>
@@ -1128,6 +1256,7 @@ export default function App() {
           <Route path="/calendar" element={<CalendarPage />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/news/:id" element={<NewsDetailPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </>
