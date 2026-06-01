@@ -295,6 +295,11 @@ function EventModal({ event, onClose }: { event: typeof EVENTS[0] | null; onClos
                   )}
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                  {(event as any).registerLink && (
+                    <a href={(event as any).registerLink} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 bg-school-tan text-school-maroon font-black rounded-xl text-xs uppercase tracking-widest hover:bg-white transition-all hover:-translate-y-0.5 shadow-[0_8px_20px_rgba(107,20,29,0.15)]">
+                      ✍️ Register Now
+                    </a>
+                  )}
                   <a href={googleCalUrl} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 bg-school-maroon text-white font-black rounded-xl text-xs uppercase tracking-widest hover:bg-school-maroon/90 transition-all hover:-translate-y-0.5 shadow-[0_8px_20px_rgba(107,20,29,0.2)]">
                     <Calendar className="w-4 h-4" /> {t('events.modal.addCal')}
                   </a>
@@ -550,38 +555,91 @@ function SchoolWebsite() {
       <EventModal event={selectedEvent} onClose={() => setSelectedEvent(null)} />
 
       {/* ── HERO ── */}
-      <section ref={heroRef} id="home" className="relative h-screen flex items-center justify-center overflow-hidden bg-school-maroon">
+      <section ref={heroRef} id="home" className="relative h-[100svh] min-h-[600px] flex items-center justify-center overflow-hidden bg-school-maroon">
+
+        {/* Original background with parallax */}
         <motion.div className="absolute inset-0 z-0" style={{ y: heroY }}>
-          <img src="/assets/Image/dgs.png" alt="" className="w-full h-[115%] object-cover opacity-50"
-            onError={(e) => { const img = e.currentTarget; const f = ['/assets/Image/2.jpeg','/assets/Image/3.jpeg','/assets/Image/4.jpeg']; const n = f[0]; if (n) img.src = n; else img.style.display = 'none'; }} />
+          <img src="/assets/Image/dgs.png" alt="" className="w-full h-[115%] object-cover object-center opacity-50"
+            onError={(e) => { const img = e.currentTarget; img.src = '/assets/Image/photo6.jpg'; }} />
           <div className="absolute inset-0 bg-gradient-to-t from-school-maroon via-school-maroon/60 to-school-maroon/20" />
         </motion.div>
-        <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-school-tan/10 rounded-full pointer-events-none" style={{ filter: 'blur(140px)' }} />
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-12 md:pt-20">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} className="flex items-center justify-center gap-3 mb-8">
-            <div className="h-px w-8 bg-school-tan/40" />
-            <span className="text-school-tan/80 font-black uppercase tracking-[0.4em] text-[10px]">{t('hero.tagline')}</span>
-            <div className="h-px w-8 bg-school-tan/40" />
+
+        {/* Ambient glow */}
+        <div className="absolute top-0 right-0 w-[40vw] h-[40vw] bg-school-tan/10 rounded-full pointer-events-none z-[1]" style={{ filter: 'blur(140px)' }} />
+
+        {/* Content */}
+        <div className="relative z-10 w-full max-w-4xl mx-auto px-5 sm:px-8 text-center flex flex-col items-center justify-center">
+
+          {/* Eyebrow */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} className="flex items-center justify-center gap-3 mb-5 md:mb-8">
+            <div className="h-px w-6 md:w-8 bg-school-tan/40" />
+            <span className="text-school-tan/80 font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-[9px] md:text-[10px]">{t('hero.tagline')}</span>
+            <div className="h-px w-6 md:w-8 bg-school-tan/40" />
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 40, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-serif text-white mb-6 md:mb-8 leading-[0.9] tracking-tighter">
+
+          {/* Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 40, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="text-[2.2rem] sm:text-6xl md:text-7xl lg:text-9xl font-serif text-white mb-4 md:mb-8 leading-[0.9] tracking-tighter"
+          >
             Daniel<br />Generation<br /><span className="text-school-tan italic">School.</span>
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.5 }} className="max-w-xl mx-auto text-base sm:text-lg text-white/60 mb-12 leading-relaxed font-light tracking-wide">
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="max-w-xs sm:max-w-xl mx-auto text-sm md:text-lg text-white/60 mb-8 md:mb-12 leading-relaxed font-light"
+          >
             {t('hero.subtitle')}
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.7 }} className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="flex flex-col sm:flex-row gap-3 justify-center items-center w-full max-w-xs sm:max-w-none flex-wrap"
+          >
+            {/* Register */}
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdAc7taG2e-tsPzxtu1YoOdktMux-fa_Iw3xbfZz2Caan5kpw/viewform" target="_blank" rel="noopener noreferrer"
-              className="w-full sm:w-auto group px-8 py-4 bg-school-tan text-school-maroon font-black rounded-xl hover:bg-white transition-all flex items-center justify-center gap-3 shadow-[0_20px_60px_rgba(107,20,29,0.4)] hover:-translate-y-1 text-sm uppercase tracking-widest">
-              {t('hero.register')} <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              className="w-full sm:w-auto px-6 py-3 md:px-8 md:py-4 bg-school-tan text-school-maroon font-black rounded-xl hover:bg-white transition-all flex items-center justify-center shadow-[0_20px_60px_rgba(107,20,29,0.4)] hover:-translate-y-1 text-xs uppercase tracking-widest">
+              {t('hero.register')}
             </a>
+
+            {/* Summer with Jesus */}
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScB6p-7n1FvloGC6N2-A8oxVEILZoal4yZU7taaKym4vWZtJg/viewform" target="_blank" rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-3 md:px-8 md:py-4 bg-white/15 border border-school-tan/40 text-school-tan font-black rounded-xl hover:bg-school-tan/20 transition-all flex items-center justify-center backdrop-blur-xl text-xs uppercase tracking-widest">
+              Summer With Jesus
+            </a>
+
+            {/* Book a Visit */}
             <a href={BOOK_VISIT_URL} target="_blank" rel="noopener noreferrer"
-              className="w-full sm:w-auto px-8 py-4 bg-white/10 border border-white/25 text-white font-black rounded-xl hover:bg-white/18 hover:border-white/40 transition-all flex items-center justify-center gap-2 backdrop-blur-xl text-sm uppercase tracking-widest">
+              className="w-full sm:w-auto px-6 py-3 md:px-8 md:py-4 bg-white/10 border border-white/20 text-white font-black rounded-xl hover:bg-white/20 transition-all flex items-center justify-center backdrop-blur-xl text-xs uppercase tracking-widest">
               {t('hero.bookVisit')}
             </a>
-            <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="w-full sm:w-auto px-8 py-4 border border-white/10 text-white/50 font-bold rounded-xl hover:bg-white/5 transition-all text-sm">
+
+            {/* Discover More — desktop only */}
+            <button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+              className="hidden sm:flex px-6 py-3 md:px-8 md:py-4 border border-white/10 text-white/40 font-bold rounded-xl hover:bg-white/5 transition-all text-xs items-center justify-center">
               {t('hero.discover')}
             </button>
           </motion.div>
+
+          {/* Mobile scroll hint */}
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+            onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+            className="mt-6 flex sm:hidden flex-col items-center gap-1 text-white/30"
+          >
+            <span className="text-[9px] font-black uppercase tracking-widest">Scroll</span>
+            <ChevronDown className="w-4 h-4 animate-bounce" />
+          </motion.button>
         </div>
       </section>
 

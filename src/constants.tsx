@@ -26,21 +26,21 @@ export const PROGRAMS = [
 
 export const EVENTS = [
   {
-    date: 'STARTING AT 6TH JULY 2026',
-    type: 'Field Trip',
+    date: '13th July – 7th August 2026',
+    type: 'Summer Program',
     name: 'SUMMER WITH JESUS',
     icon: <MapPin className="w-4 h-4" />,
-    description: 'Join us this July for a memorable campus program filled with faith, fun, learning, and meaningful experiences. Daniel Generation School warmly welcomes children and families to "Summer with Jesus" — a special program designed to inspire spiritual growth, friendship, and joyful discovery in a nurturing environment. Through engaging activities, guided sessions, and exciting campus experiences, participants will enjoy a season of connection, purpose, and unforgettable memories.',
+    description: 'A Christ-centered summer experience where children grow in faith, joy, love, and godly character. Open to ages 3–14 years.\n\n📍 Location: Kagugu, KG 24\n\n💰 Program Fees:\n• 4-week program: 150,000 RWF\n• Weekly option: 50,000 RWF per week\n\nAll meals, materials and activity supplies are provided by the school.',
+    registerLink: 'https://docs.google.com/forms/d/e/1FAIpQLScB6p-7n1FvloGC6N2-A8oxVEILZoal4yZU7taaKym4vWZtJg/viewform',
   },
   {
-    date: 'THURSDAY, 30th July 2026',
-    type: 'Field Trip',
-    name: 'SUMMER WITH JESUS END',
-    icon: <MapPin className="w-4 h-4" />,
-    description: 'The closing day of our "Summer with Jesus" program — a celebration of everything our learners have experienced, grown through, and discovered over the month. Families are warmly invited to join us for this special farewell gathering filled with testimonies, performances, and joyful celebration of faith and community.',
+    date: 'September 2026',
+    type: 'Academic Year',
+    name: 'NEW SCHOOL YEAR 2026/2027',
+    icon: <CheckCircle2 className="w-4 h-4" />,
+    description: 'We are excited to welcome our learners back for the new academic year 2026/2027! Admissions are open for Nursery (KG1–KG3) and Primary (Grade 1–Grade 3). Join the DGS family and be part of a generation shaped by faith, excellence, and Godly character.',
+    registerLink: 'https://docs.google.com/forms/d/e/1FAIpQLSdAc7taG2e-tsPzxtu1YoOdktMux-fa_Iw3xbfZz2Caan5kpw/viewform',
   },
-  // { date: 'Friday, 22nd May 2026', type: 'Internal Event', name: 'Sports Day', icon: <Users className="w-4 h-4" />, description: 'Annual sports day celebration.' },
-  // { date: 'Friday, 26th June 2026', type: 'On-Campus Event', name: 'End of Year Presentations', icon: <CheckCircle2 className="w-4 h-4" />, description: 'End of year showcase.' }
 ];
 
 export const GALLERY_IMAGES = [
